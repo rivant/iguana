@@ -13,29 +13,36 @@ PAGE.listChannels = function() {
    $.post(
       "list-channels",
       function(Data) {
-        console.log(Data);
-       
-        var RawData = Data;
-        var TD = {};
-        TD.aoColumns = [{"sTitle" : "Channel Name", "sWidth" : "28em" },
-                        {'sTitle' : 'Status', 'sType' : 'html', "sWidth" : "6em"},
-                        {'sTitle' : 'Type',   'sType' : 'string', "sWidth" : "4em"},
-                        {'sTitle' : 'Export', 'sType' : 'html', "sWidth" : "8em"} ]  
-        
-        TD.aaData = [];
-        for (var i=0; i < RawData.name.length; i++){
-           TD.aaData[i] = [];
-           TD.aaData[i][0] = RawData.name[i];
-           TD.aaData[i][1] = '<div class="chan-' + RawData.status[i] + '"/>';
-           TD.aaData[i][2] = '<div class="chan-type"><div class="' + RawData.source[i] + '"></div><div class="FILTER"></div><div class="' + RawData.destination[i] + '"></div></div>';
-           TD.aaData[i][3] = '<a href="#Page=exportSummary&Name=' + RawData.name[i] + '">Export</a>';             
-        }
-        lib.datatable.addSearchHighlight(TD);  
-       
-        $("#channels_list_table").dataTable(TD);
-
-      }
+         console.log(Data);
+         
+         var RawData = Data;
+         var TD = {};
+         TD.aoColumns = [{"sTitle" : "Channel Name", "sWidth" : "28em" },
+                         {'sTitle' : 'Status', 'sType' : 'html', "sWidth" : "6em"},
+                         {'sTitle' : 'Type',   'sType' : 'string', "sWidth" : "4em"},
+                         {'sTitle' : 'Export', 'sType' : 'html', "sWidth" : "8em"}]  
+            
+         TD.aaData = [];
+         for (var i=0; i < RawData.name.length; i++){
+            TD.aaData[i] = [];
+            TD.aaData[i][0] = RawData.name[i];
+            TD.aaData[i][1] = '<div class="chan-' + RawData.status[i] + '"/>';
+            TD.aaData[i][2] = '<div class="chan-type"><div class="' + RawData.source[i] + '"></div><div class="FILTER"></div><div class="' + RawData.destination[i] + '"></div></div>';
+            TD.aaData[i][3] = '<span id="' + RawData.name[i] + '" class="export anchor">Export</span>';
+            //TD.aaData[i][3] = '<a class="export" href="#Page=exportSummary&Name=' + RawData.name[i] + '" name="' + RawData.name[i] + '">Export</a>';             
+         }
+         
+         TD.bPaginate = false;
+         
+         lib.datatable.addSearchHighlight(TD);           
+                  
+         $("#channels_list_table").dataTable(TD);           
+         $('span.export').click(function(){               
+            PAGE.exportSummary({'Name': $(this).attr('id')});
+         });
+      }      
    );
+   
 }
 
 PAGE.default = PAGE.listChannels;

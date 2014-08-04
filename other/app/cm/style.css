@@ -45,6 +45,11 @@ h1 {
    float : right;
 }
 
+/* Set a fixed width to align username and password headings */
+.repolist{
+   width: 410px;
+}
+
 span#add-channel{
    background-image:url('button-addchannel.gif');  
    float: right;
@@ -56,7 +61,7 @@ span#add-channel{
 input[name='serverUrl'] {
    margin-bottom: 1%;
    margin-left: 29px;
-   width: 403px;
+   width: 404px;
    padding-left: 5px;
 }
 
@@ -115,6 +120,11 @@ span.button{
    border: 2px solid lightblue;   
    box-shadow: 2px 2px 2px #888888;
    cursor: pointer;
+}
+
+span.anchor{
+   cursor: pointer;
+   text-decoration: underline;
 }
 
 span.button-delete{
@@ -298,4 +308,3 @@ input {
    border: 1px solid #DDDDDD;
    height: 20px;
 }
-

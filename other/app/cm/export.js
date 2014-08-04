@@ -10,11 +10,11 @@ PAGE.exportSummary = function(Params) {
             return;
          }
          console.log(Data);
-         var H =cm.help.header() + cm.help.breadCrumb('Export Channel') 
+         var H =cm.help.header() + "<hr><a href='.'>Dashboard</a> &gt; Export Channel<hr>"
               + "<p>Export Channel <b>" + Params.Name + "</b> into <i>" 
               + app.cm.repo.fillSelect(Data) + "</i>?</p>"
               + "<p><span class='label'>Export sample data?</span><input id='sample_data' type='checkbox' value='unchecked'></p>"
-              + "<p><span id='submit' class='button'>Yes</a></span> <span class='button'><a href='#'>Cancel</a></span>" + cm.help.footer();  
+              + "<p><span id='submit' class='button anchor'>Yes</a></span> <span class='button'><a href='#'>Cancel</a></span>" + cm.help.footer();  
             $('body').html(H);
             $("#submit").click(function(E){
             $.post("export_channel", {'name' : Params.Name, 'repository' : cm.settings.repository, 'sample_data' : $('#sample_data').val()},

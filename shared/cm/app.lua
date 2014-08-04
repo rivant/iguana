@@ -50,8 +50,8 @@ function cm.app.addChannel(R)
    trace(Auth)
    
    local Config = cm.config.open()
+   trace(Config.config.locations[2].Dir)
    local Dir = Config.config.locations[RepoIndex+1].Dir
-   
    local Credentials = basicauth.getCredentials(R)
    local Success, Api = pcall(iguanaServer.connect, {url=Auth.url, 
                                            username=Auth.username, 
@@ -76,6 +76,7 @@ function cm.app.addChannel(R)
    
    iguana.channel.add{dir=Dir, 
       definition=ChannelName, api=Api}
+   
    return {success=true}
 end
 
